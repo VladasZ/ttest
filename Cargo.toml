@@ -7,3 +7,4 @@ members = ["ttest"]
 default-members = ["ttest"]
 
 [workspace.dependencies]
+fake = "3.0"

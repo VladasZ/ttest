@@ -9,3 +9,4 @@ homepage = "https://github.com/VladasZ/ttest"
 repository = "https://github.com/VladasZ/ttest"
 
 [dependencies]
+fake = { workspace = true }
