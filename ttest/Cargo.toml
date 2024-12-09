@@ -9,4 +9,8 @@ homepage = "https://github.com/VladasZ/ttest"
 repository = "https://github.com/VladasZ/ttest"
 
 [dependencies]
+log = { workspace = true }
 fake = { workspace = true }
+
+[dev-dependencies]
+simple_logger = { workspace = true }

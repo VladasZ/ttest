@@ -7,4 +7,6 @@ members = ["ttest"]
 default-members = ["ttest"]
 
 [workspace.dependencies]
+log = "0.4"
 fake = "3.0"
+simple_logger = "5.0"

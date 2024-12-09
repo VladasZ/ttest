@@ -1,3 +1,4 @@
+use fake::{Fake, Faker};
 use std::{
     collections::BTreeMap,
     marker::PhantomData,
@@ -5,8 +6,6 @@ use std::{
     ops::{Deref, DerefMut},
     sync::Mutex,
 };
-
-use fake::{Fake, Faker};
 
 use crate::controller::Controller;
 
@@ -16,15 +15,23 @@ static BUFFERS: Mutex<BTreeMap<String, [u8; MAX_WRAPPED_SIZE]>> = Mutex::new(BTr
 
 pub struct Wrapper<T: Default> {
     wrapped_id: u64,
-    _p:         PhantomData<T>,
+    _p: PhantomData<*const T>,
 }
+
+impl<T: Default> Clone for Wrapper<T> {
+    fn clone(&self) -> Self {
+        *self
+    }
+}
+
+impl<T: Default> Copy for Wrapper<T> {}
 
 impl<T: Default> Default for Wrapper<T> {
     fn default() -> Self {
         Self::assert_size();
         Self {
             wrapped_id: Faker.fake(),
-            _p:         PhantomData,
+            _p: PhantomData,
         }
     }
 }
@@ -34,7 +41,7 @@ impl<T: Default> Wrapper<T> {
         Self::assert_size();
         Self {
             wrapped_id: Faker.fake(),
-            _p:         PhantomData,
+            _p: PhantomData,
         }
     }
 }
@@ -108,16 +115,16 @@ mod tests {
 
     #[derive(Debug)]
     struct User {
-        id:   u64,
-        age:  u32,
+        id: u64,
+        age: u32,
         name: String,
     }
 
     impl Default for User {
         fn default() -> Self {
             User {
-                id:   15,
-                age:  32,
+                id: 15,
+                age: 32,
                 name: "Sokol".to_string(),
             }
         }
