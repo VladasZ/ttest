@@ -5,7 +5,7 @@ static TEST_NAME: Mutex<String> = Mutex::new(String::new());
 pub(crate) struct Controller {}
 
 impl Controller {
-    pub(crate) fn _set_test_name(name: &str) {
+    pub(crate) fn set_test_name(name: &str) {
         *TEST_NAME.lock().unwrap() = name.into();
     }
 
